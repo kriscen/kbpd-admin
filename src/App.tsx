@@ -1,9 +1,5 @@
-import Router from '@/router/index';
-
 const App = () => {
-  return (
-      <Router />
-  );
+  return <div>this is app</div>;
 };
 
 export default App;
