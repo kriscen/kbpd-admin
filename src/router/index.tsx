@@ -1,15 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Home from '@/views/home';
-import About from '@/views/about';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import routes from '~react-pages'
 
-const router = createBrowserRouter([
+
+const rootRoutes = [
   {
     path: '/',
-    element: <Home />,
+    children: [
+      ...routes,
+      {
+        path: '*',
+        element: <Navigate to="/exception/404" replace />,
+      },
+    ],
   },
-  {
-    path: '/detail',
-    element: <About />,
-  },
-]);
-export default router;
+]
+
+export default function Router() {
+  const router = createBrowserRouter(rootRoutes)
+
+  return <RouterProvider router={router} />
+}

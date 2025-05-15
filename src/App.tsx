@@ -1,5 +1,11 @@
-const App = () => {
-  return <div>this is app</div>;
-};
+import { App as AntdApp } from 'antd'
 
-export default App;
+import Router from './router'
+
+export default function App() {
+  return (
+    <AntdApp>
+      <Router />
+    </AntdApp>
+  )
+}
