@@ -1,6 +1,13 @@
 {
-    "i18n-ally.localesPaths": [
-        "src/locales",
-        "src/locales/langs"
-    ]
+  "cSpell.words": [
+    "Avenir",
+    "devapi",
+    "Gitee",
+    "Persistedstate",
+    "Pinia",
+    "pxtorem",
+    "Vite",
+    "withtypes"
+  ],
+  "eslint.experimental.useFlatConfig": true
 }
