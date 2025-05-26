@@ -4,17 +4,6 @@
   <svg-icon name="phone" />
 </template>
 
-<script setup lang="ts">
-import axios from "axios";
-
-axios
-  .post("/api/user/login", {
-    username: "admin",
-    password: "111111"
-  })
-  .then(res => {
-    console.log(res.data);
-  });
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss"></style>
