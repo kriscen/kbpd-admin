@@ -7,6 +7,9 @@ import "virtual:svg-icons-register";
 import gloablComponent from "@/components/index";
 import "@/styles/index.scss";
 import router from "@/router";
+import { createPinia } from "pinia";
+
+const pinia = createPinia();
 
 const app = createApp(App);
 app.use(ElementPlus, {
@@ -14,4 +17,5 @@ app.use(ElementPlus, {
 });
 app.use(gloablComponent);
 app.use(router);
+app.use(pinia);
 app.mount("#app");
