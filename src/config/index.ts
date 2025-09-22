@@ -26,8 +26,35 @@ export interface AppConfig {
 
   // 布局配置
   layout: {
-    sidebarWidth: number;
-    sidebarCollapsedWidth: number;
+    // 布局模式
+    mode: "vertical" | "horizontal" | "mix";
+
+    // 主题配置
+    theme: {
+      style: "light" | "dark" | "system";
+      primaryColor: string;
+      grayMode: boolean;
+      weakMode: boolean;
+    };
+
+    // 功能配置
+    features: {
+      fixedHeader: boolean;
+      showTabs: boolean;
+      showFooter: boolean;
+      keepAlive: boolean;
+      multiTagsCache: boolean;
+      stretch: boolean;
+    };
+
+    // 侧边栏配置
+    sidebar: {
+      collapsed: boolean;
+      width: number;
+      collapsedWidth: number;
+    };
+
+    // 头部和页脚高度
     headerHeight: number;
     footerHeight: number;
   };
@@ -65,8 +92,30 @@ const defaultConfig: AppConfig = {
   },
 
   layout: {
-    sidebarWidth: 210,
-    sidebarCollapsedWidth: 64,
+    mode: "vertical",
+
+    theme: {
+      style: "light",
+      primaryColor: "#409eff",
+      grayMode: false,
+      weakMode: false
+    },
+
+    features: {
+      fixedHeader: true,
+      showTabs: true,
+      showFooter: true,
+      keepAlive: true,
+      multiTagsCache: false,
+      stretch: false
+    },
+
+    sidebar: {
+      collapsed: false,
+      width: 210,
+      collapsedWidth: 64
+    },
+
     headerHeight: 60,
     footerHeight: 40
   },

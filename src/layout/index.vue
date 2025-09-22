@@ -26,9 +26,6 @@
       <!-- 页脚 -->
       <LayFooter v-if="!layoutConfig.hideFooter" />
     </div>
-
-    <!-- 设置面板 -->
-    <LaySetting />
   </div>
 </template>
 
@@ -44,7 +41,6 @@ import LayNavbar from "@/layout/components/lay-navbar/index.vue";
 import LayTag from "@/layout/components/lay-tag/index.vue";
 import LayContent from "@/layout/components/lay-content/index.vue";
 import LayFooter from "@/layout/components/lay-footer/index.vue";
-import LaySetting from "@/layout/components/lay-setting/index.vue";
 
 // 组合式函数
 const { layoutConfig, initStorage } = useLayout();

@@ -56,110 +56,7 @@
     </div>
 
     <!-- 主要内容区域 -->
-    <el-row :gutter="20" class="main-content">
-      <!-- 左侧内容 -->
-      <el-col :xs="24" :lg="16">
-        <!-- 数据图表 -->
-        <el-card class="chart-card" shadow="hover">
-          <template #header>
-            <div class="card-header">
-              <span>数据趋势</span>
-              <el-button text type="primary">查看更多</el-button>
-            </div>
-          </template>
-          <div class="chart-container" ref="chartRef">
-            <!-- 这里可以集成图表库，比如 ECharts -->
-            <div class="mock-chart">
-              <div class="chart-placeholder">
-                <el-icon size="64" color="#e6e8eb">
-                  <TrendCharts />
-                </el-icon>
-                <p>数据图表区域</p>
-              </div>
-            </div>
-          </div>
-        </el-card>
-
-        <!-- 最近动态 -->
-        <el-card class="activity-card" shadow="hover">
-          <template #header>
-            <span>最近动态</span>
-          </template>
-          <el-timeline>
-            <el-timeline-item
-              v-for="(activity, index) in recentActivities"
-              :key="index"
-              :timestamp="activity.time"
-              :color="activity.color"
-            >
-              <div class="activity-item">
-                <div class="activity-title">{{ activity.title }}</div>
-                <div class="activity-desc">{{ activity.description }}</div>
-              </div>
-            </el-timeline-item>
-          </el-timeline>
-        </el-card>
-      </el-col>
-
-      <!-- 右侧内容 -->
-      <el-col :xs="24" :lg="8">
-        <!-- 快捷操作 -->
-        <el-card class="quick-actions" shadow="hover">
-          <template #header>
-            <span>快捷操作</span>
-          </template>
-          <div class="actions-grid">
-            <div
-              v-for="(action, index) in quickActions"
-              :key="index"
-              class="action-item"
-              @click="handleQuickAction(action)"
-            >
-              <el-icon :size="24" :color="action.color">
-                <component :is="action.icon" />
-              </el-icon>
-              <span>{{ action.label }}</span>
-            </div>
-          </div>
-        </el-card>
-
-        <!-- 通知公告 -->
-        <el-card class="notice-card" shadow="hover">
-          <template #header>
-            <span>通知公告</span>
-          </template>
-          <div class="notice-list">
-            <div
-              v-for="(notice, index) in notices"
-              :key="index"
-              class="notice-item"
-              @click="handleNoticeClick(notice)"
-            >
-              <div class="notice-content">
-                <div class="notice-title">{{ notice.title }}</div>
-                <div class="notice-time">{{ notice.time }}</div>
-              </div>
-              <el-icon class="notice-arrow">
-                <ArrowRight />
-              </el-icon>
-            </div>
-          </div>
-        </el-card>
-
-        <!-- 系统信息 -->
-        <el-card class="system-info" shadow="hover">
-          <template #header>
-            <span>系统信息</span>
-          </template>
-          <div class="info-list">
-            <div class="info-item" v-for="(info, key) in systemInfo" :key="key">
-              <span class="info-label">{{ info.label }}</span>
-              <span class="info-value">{{ info.value }}</span>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+    <el-row :gutter="20" class="main-content"> </el-row>
   </div>
 </template>
 
@@ -174,12 +71,10 @@ import {
   ShoppingBag,
   ArrowUp,
   ArrowDown,
-  TrendCharts,
   Plus,
   Setting,
   Document,
-  DataBoard,
-  ArrowRight
+  DataBoard
 } from "@element-plus/icons-vue";
 import { useUserStore } from "@/store/user";
 

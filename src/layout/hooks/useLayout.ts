@@ -1,4 +1,5 @@
 import { ref, computed } from "vue";
+import { getAppConfig } from "@/config";
 import type {
   LayoutConfig,
   LayoutType,
@@ -6,22 +7,25 @@ import type {
   OverallStyleType
 } from "../types";
 
-// 默认布局配置
+// 从配置文件获取默认配置
+const appConfig = getAppConfig();
+
+// 默认布局配置 - 从配置文件映射到原有格式
 const defaultConfig: LayoutConfig = {
-  layout: "vertical",
-  theme: "light",
-  darkMode: false,
-  sidebarStatus: true,
-  epThemeColor: "#409eff",
+  layout: appConfig.layout.mode as LayoutType,
+  theme: appConfig.layout.theme.style as ThemeType,
+  darkMode: appConfig.layout.theme.style === "dark",
+  sidebarStatus: !appConfig.layout.sidebar.collapsed,
+  epThemeColor: appConfig.layout.theme.primaryColor,
   themeColor: "default",
-  overallStyle: "light",
-  isKeepAlive: true,
-  hideTabs: false,
-  hideFooter: false,
-  stretch: false,
-  multiTagsCache: false,
-  weakMode: false,
-  greyMode: false
+  overallStyle: appConfig.layout.theme.style as OverallStyleType,
+  isKeepAlive: appConfig.layout.features.keepAlive,
+  hideTabs: !appConfig.layout.features.showTabs,
+  hideFooter: !appConfig.layout.features.showFooter,
+  stretch: appConfig.layout.features.stretch,
+  multiTagsCache: appConfig.layout.features.multiTagsCache,
+  weakMode: appConfig.layout.theme.weakMode,
+  greyMode: appConfig.layout.theme.grayMode
 };
 
 // 布局配置状态

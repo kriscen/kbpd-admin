@@ -84,15 +84,6 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-
-      <!-- 设置按钮 -->
-      <div class="navbar-item">
-        <el-tooltip content="布局设置" placement="bottom">
-          <el-icon size="18" @click="showSettings">
-            <Setting />
-          </el-icon>
-        </el-tooltip>
-      </div>
     </div>
 
     <!-- 搜索弹窗 -->
