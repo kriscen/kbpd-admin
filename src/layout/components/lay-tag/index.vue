@@ -202,6 +202,11 @@ const scrollToActiveTag = () => {
     ) as HTMLElement;
     if (activeTag && scrollbarRef.value) {
       const scrollContainer = scrollbarRef.value.$refs.wrap;
+      // 检查 scrollContainer 是否存在
+      if (!scrollContainer) {
+        return;
+      }
+
       const offsetLeft = activeTag.offsetLeft;
       const tagWidth = activeTag.offsetWidth;
       const containerWidth = scrollContainer.offsetWidth;

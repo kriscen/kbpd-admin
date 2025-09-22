@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, markRaw } from "vue";
 import { ElMessage } from "element-plus";
 import {
   User,
@@ -91,28 +91,28 @@ const statsData = ref([
   {
     label: "总用户数",
     value: "1,234",
-    icon: UserFilled,
+    icon: markRaw(UserFilled),
     color: "#409eff",
     trend: 12.5
   },
   {
     label: "今日访问",
     value: "856",
-    icon: Monitor,
+    icon: markRaw(Monitor),
     color: "#67c23a",
     trend: 8.2
   },
   {
     label: "订单数量",
     value: "2,468",
-    icon: ShoppingBag,
+    icon: markRaw(ShoppingBag),
     color: "#e6a23c",
     trend: -2.1
   },
   {
     label: "数据分析",
     value: "89.3%",
-    icon: DataAnalysis,
+    icon: markRaw(DataAnalysis),
     color: "#f56c6c",
     trend: 5.7
   }
@@ -122,25 +122,25 @@ const statsData = ref([
 const quickActions = ref([
   {
     label: "新建项目",
-    icon: Plus,
+    icon: markRaw(Plus),
     color: "#409eff",
     action: "create-project"
   },
   {
     label: "系统设置",
-    icon: Setting,
+    icon: markRaw(Setting),
     color: "#909399",
     action: "system-settings"
   },
   {
     label: "数据报告",
-    icon: Document,
+    icon: markRaw(Document),
     color: "#67c23a",
     action: "data-report"
   },
   {
     label: "数据面板",
-    icon: DataBoard,
+    icon: markRaw(DataBoard),
     color: "#e6a23c",
     action: "dashboard"
   }
