@@ -216,6 +216,7 @@ pnpm lint:style
 - `chore`: 构建过程或辅助工具的变动
 
 示例：
+
 ```bash
 git commit -m "feat: 添加用户管理页面"
 git commit -m "fix: 修复登录页面验证码显示问题"
