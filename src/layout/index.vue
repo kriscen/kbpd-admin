@@ -49,7 +49,6 @@ import LaySetting from "@/layout/components/lay-setting/index.vue";
 // 组合式函数
 const { layoutConfig, initStorage } = useLayout();
 const {
-  device,
   sidebar,
   isMobile,
   sidebarOpened,

@@ -1,4 +1,4 @@
-import { ref, computed, reactive, nextTick } from "vue";
+import { ref, computed, reactive } from "vue";
 import type { TagView, TagsViewContextMenu } from "../types";
 import { useRouter, useRoute } from "vue-router";
 

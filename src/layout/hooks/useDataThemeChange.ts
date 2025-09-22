@@ -1,4 +1,4 @@
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 import type { ThemeType, OverallStyleType } from "../types";
 
 // 主题相关状态

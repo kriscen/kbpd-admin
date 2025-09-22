@@ -1,5 +1,5 @@
 import { ref, computed, reactive } from "vue";
-import type { DeviceType, SidebarState, AppState } from "../types";
+import type { AppState } from "@/layout/types";
 
 // 应用状态
 const appState = reactive<AppState>({

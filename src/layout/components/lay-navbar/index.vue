@@ -117,7 +117,6 @@ import {
   Setting,
   SwitchButton
 } from "@element-plus/icons-vue";
-import { ElMessage } from "element-plus";
 import { useNav } from "@/layout/hooks/useNav";
 import { useLayout } from "@/layout/hooks/useLayout";
 import LaySearch from "@/layout/components/lay-search/index.vue";
