@@ -1,4 +1,3 @@
-//通过vue-router插件实现路由配置
 import {
   createRouter,
   createWebHistory,
@@ -7,6 +6,11 @@ import {
 } from "vue-router";
 import { constantRoutes } from "./routes";
 import { ElMessage } from "element-plus";
+import {
+  isWhiteList,
+  hasRoutePermission,
+  getRedirectUrl
+} from "@/utils/routePermission";
 
 //创建路由器
 const router = createRouter({
@@ -28,6 +32,16 @@ const getTokenFromStorage = () => {
   return localStorage.getItem("user-token") || "";
 };
 
+// 获取用户信息
+const getUserInfoFromStorage = () => {
+  try {
+    const userInfo = localStorage.getItem("user-info");
+    return userInfo ? JSON.parse(userInfo) : null;
+  } catch {
+    return null;
+  }
+};
+
 // 全局前置守卫
 router.beforeEach(
   (
@@ -37,19 +51,20 @@ router.beforeEach(
   ) => {
     const token = getTokenFromStorage();
     const isLoggedIn = !!token;
+    const userInfo = getUserInfoFromStorage();
 
     // 设置页面标题
     if (to.meta?.title) {
       document.title = `${to.meta.title} - 后台管理系统`;
     }
 
-    // 如果访问的是登录页面
-    if (to.path === "/login" || to.path === "/auth/callback") {
+    // 检查是否为白名单路由
+    if (isWhiteList(to.path)) {
       if (isLoggedIn && to.path === "/login") {
         // 已登录且访问登录页，跳转到首页
         next("/home");
       } else {
-        // 未登录或OAuth2回调，允许访问
+        // 白名单路由，允许访问
         next();
       }
       return;
@@ -60,15 +75,24 @@ router.beforeEach(
 
     if (requiresAuth) {
       if (isLoggedIn) {
-        // 已登录，允许访问
-        next();
+        // 已登录，检查权限
+        if (userInfo && userInfo.roles) {
+          if (hasRoutePermission(to.path, userInfo.roles)) {
+            // 有权限，允许访问
+            next();
+          } else {
+            // 无权限，跳转到403或首页
+            ElMessage.error("无权访问该页面");
+            next("/home");
+          }
+        } else {
+          // 没有用户信息，允许访问（由布局组件去获取用户信息）
+          next();
+        }
       } else {
         // 未登录，跳转到登录页
         ElMessage.warning("请先登录");
-        next({
-          path: "/login",
-          query: { redirect: to.fullPath } // 保存目标路由
-        });
+        next(getRedirectUrl(to.fullPath));
       }
     } else {
       // 不需要认证，直接访问

@@ -2,6 +2,7 @@
  * 环境配置工具类
  * 用于获取环境变量和判断当前登录模式
  */
+import { ENV } from "@/config";
 
 export const getEnvConfig = () => {
   return {
@@ -16,11 +17,11 @@ export const getEnvConfig = () => {
 
     // OAuth2配置
     oauth2: {
-      authUrl: import.meta.env.VITE_OAUTH2_AUTH_URL,
-      tokenUrl: import.meta.env.VITE_OAUTH2_TOKEN_URL,
-      clientId: import.meta.env.VITE_OAUTH2_CLIENT_ID,
-      redirectUri: import.meta.env.VITE_OAUTH2_REDIRECT_URI,
-      scope: import.meta.env.VITE_OAUTH2_SCOPE
+      authUrl: import.meta.env.VITE_OAUTH2_AUTH_URL || "",
+      tokenUrl: import.meta.env.VITE_OAUTH2_TOKEN_URL || "",
+      clientId: import.meta.env.VITE_OAUTH2_CLIENT_ID || "",
+      redirectUri: import.meta.env.VITE_OAUTH2_REDIRECT_URI || "",
+      scope: import.meta.env.VITE_OAUTH2_SCOPE || "read write"
     }
   };
 };
@@ -28,30 +29,22 @@ export const getEnvConfig = () => {
 /**
  * 判断是否为开发环境
  */
-export const isDev = () => {
-  return import.meta.env.NODE_ENV === "development";
-};
+export const isDev = () => ENV.isDev;
 
 /**
  * 判断是否为生产环境
  */
-export const isProd = () => {
-  return import.meta.env.NODE_ENV === "production";
-};
+export const isProd = () => ENV.isProd;
 
 /**
  * 判断是否使用模拟数据登录
  */
-export const isMockLogin = () => {
-  return import.meta.env.VITE_LOGIN_MODE === "mock";
-};
+export const isMockLogin = () => ENV.isMockLogin;
 
 /**
  * 判断是否使用OAuth2登录
  */
-export const isOAuth2Login = () => {
-  return import.meta.env.VITE_LOGIN_MODE === "oauth2";
-};
+export const isOAuth2Login = () => ENV.isOAuth2Login;
 
 /**
  * 获取完整的OAuth2授权URL

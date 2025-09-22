@@ -29,10 +29,8 @@ request.interceptors.request.use(
     // 获取token并添加到请求头
     const token = getTokenFromStorage();
     if (token) {
-      // 根据后端要求设置Authorization头或者token头
+      // 统一使用Authorization Bearer格式
       config.headers.Authorization = `Bearer ${token}`;
-      // 如果后端使用token字段，可以使用下面的方式
-      config.headers.token = token;
     }
     return config;
   },
@@ -89,7 +87,6 @@ request.interceptors.response.use(
                   // 重试当前请求
                   const originalRequest = error.config;
                   originalRequest.headers.Authorization = `Bearer ${newToken}`;
-                  originalRequest.headers.token = newToken;
 
                   return request(originalRequest);
                 } else {
@@ -122,7 +119,6 @@ request.interceptors.response.use(
             requests.push((token: string) => {
               const originalRequest = error.config;
               originalRequest.headers.Authorization = `Bearer ${token}`;
-              originalRequest.headers.token = token;
               resolve(request(originalRequest));
             });
           });

@@ -41,6 +41,7 @@ export interface OAuth2LoginResp {
   message?: string;
 }
 
+// 用户信息接口定义
 interface userInfo {
   userId: number;
   avatar: string;
@@ -57,6 +58,7 @@ interface userInfo {
   department?: string;
 }
 
+// 用户信息响应包装
 interface user {
   checkUser: userInfo;
 }
@@ -67,18 +69,19 @@ export interface userInfoResp {
   message?: string;
 }
 
-//登录状态类型
+// 登录状态类型 - 增强类型安全性
 export interface LoginState {
   isLoggedIn: boolean;
   token: string;
-  refreshToken?: string;
+  refreshToken: string | null; // 明确可为null
   userInfo: userInfo | null;
   loginMode: "mock" | "oauth2";
 }
 
-//通用API响应类型
+// 通用API响应类型 - 使用泛型提供更好的类型推断
 export interface ApiResponse<T = any> {
   code: number;
   data: T;
   message?: string;
+  success?: boolean; // 添加success字段便于判断
 }

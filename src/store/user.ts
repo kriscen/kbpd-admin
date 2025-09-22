@@ -129,7 +129,8 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  // 刷新token（仅OAuth2模式）
+  // 刷新token（仅OAuth2模式）- 注意：实际的token刷新逻辑在request.ts中处理
+  // 这里保留接口用于手动触发刷新
   const refreshAccessToken = async () => {
     if (!refreshToken.value || !isOAuth2Login()) {
       return { success: false, message: "无refresh token或非OAuth2模式" };

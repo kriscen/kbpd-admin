@@ -9,9 +9,13 @@ function createUserList() {
       password: "111111",
       desc: "平台管理员",
       roles: ["平台管理员"],
-      buttons: ["cuser.detail"],
-      routes: ["home"],
-      token: "Admin Token"
+      buttons: ["cuser.detail", "cuser.add", "cuser.edit", "cuser.delete"],
+      routes: ["home", "system", "user"],
+      token: "Admin Token",
+      email: "admin@example.com",
+      phone: "13800138000",
+      realName: "系统管理员",
+      department: "技术部"
     },
     {
       userId: 2,
@@ -22,8 +26,28 @@ function createUserList() {
       desc: "系统管理员",
       roles: ["系统管理员"],
       buttons: ["cuser.detail", "cuser.user"],
+      routes: ["home", "dashboard"],
+      token: "System Token",
+      email: "system@example.com",
+      phone: "13900139000",
+      realName: "系统管理员",
+      department: "运维部"
+    },
+    {
+      userId: 3,
+      avatar:
+        "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
+      username: "test",
+      password: "123456",
+      desc: "测试用户",
+      roles: ["普通用户"],
+      buttons: ["cuser.detail"],
       routes: ["home"],
-      token: "System Token"
+      token: "Test Token",
+      email: "test@example.com",
+      phone: "13700137000",
+      realName: "测试用户",
+      department: "测试部"
     }
   ];
 }
