@@ -21,3 +21,7 @@ tests/**/coverage/
 *.njsproj
 *.sln
 tsconfig.tsbuildinfo
+
+# Auto-generated files
+auto-imports.d.ts
+components.d.ts
