@@ -13,11 +13,3 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
-
-// 扩展 vue-router 的 meta 字段
-declare module "vue-router" {
-  interface RouteMeta {
-    title?: string;
-    requiresAuth?: boolean;
-  }
-}
