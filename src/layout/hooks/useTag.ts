@@ -145,7 +145,35 @@ export function useTag() {
     const stored = localStorage.getItem("tags-view");
     if (stored) {
       try {
-        tagsList.value = JSON.parse(stored);
+        const tags = JSON.parse(stored);
+        // 清理重复的标签，保留最后一个，并特别处理首页标签
+        const uniqueTags = tags.reduce((acc: TagView[], tag: TagView) => {
+          // 对于首页标签，统一使用/home路径
+          if (tag.path === "/" || (tag.path === "/home" && tag.affix)) {
+            const existingHomeIndex = acc.findIndex(
+              t => t.path === "/home" || t.path === "/" || t.affix === true
+            );
+            if (existingHomeIndex === -1) {
+              // 没有首页标签，添加一个统一的
+              acc.unshift({
+                path: "/home",
+                title: "首页",
+                affix: true,
+                keepAlive: false
+              });
+            }
+          } else {
+            // 非首页标签正常处理
+            const existingIndex = acc.findIndex(t => t.path === tag.path);
+            if (existingIndex > -1) {
+              acc[existingIndex] = tag; // 更新现有标签
+            } else {
+              acc.push(tag); // 添加新标签
+            }
+          }
+          return acc;
+        }, []);
+        tagsList.value = uniqueTags;
       } catch (error) {
         console.warn("Failed to parse tags from localStorage:", error);
         tagsList.value = [];
@@ -157,17 +185,39 @@ export function useTag() {
   const initTags = () => {
     loadTagsFromStorage();
 
-    // 添加首页标签（固定）
-    const homeTag: TagView = {
-      path: "/",
-      title: "首页",
-      affix: true,
-      keepAlive: false
-    };
+    // 检查是否已经有首页标签（支持多种路径格式）
+    const hasHomeTag = tagsList.value.some(
+      tag => tag.path === "/home" || tag.path === "/" || tag.affix === true
+    );
 
-    if (!tagsList.value.some(tag => tag.path === "/")) {
+    // 只有在没有任何首页标签时才添加
+    if (!hasHomeTag) {
+      const homeTag: TagView = {
+        path: "/home",
+        title: "首页",
+        affix: true,
+        keepAlive: false
+      };
       tagsList.value.unshift(homeTag);
+      saveTagsToStorage();
     }
+  };
+
+  // 清理重复标签的工具函数
+  const cleanDuplicateTags = () => {
+    // 先清空本地存储
+    localStorage.removeItem("tags-view");
+
+    // 重新初始化标签列表
+    tagsList.value = [];
+
+    // 重新初始化
+    initTags();
+
+    // 添加当前路由标签
+    addCurrentRouteTag();
+
+    console.log("清理重复标签完成");
   };
 
   // 根据当前路由添加标签
@@ -179,6 +229,7 @@ export function useTag() {
         name: name as string,
         title: meta.title as string,
         keepAlive: meta.keepAlive as boolean,
+        affix: meta.affix as boolean,
         close: !meta.affix
       };
       addTag(tag);
@@ -268,6 +319,7 @@ export function useTag() {
     showContextMenu,
     hideContextMenu,
     initTags,
-    addCurrentRouteTag
+    addCurrentRouteTag,
+    cleanDuplicateTags
   };
 }

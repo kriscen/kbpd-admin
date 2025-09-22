@@ -29,7 +29,7 @@ export const constantRoutes = [
       {
         path: "home",
         component: () => import("@/views/home/index.vue"),
-        name: "home",
+        name: "Home",
         meta: {
           title: "首页",
           icon: "HomeFilled",

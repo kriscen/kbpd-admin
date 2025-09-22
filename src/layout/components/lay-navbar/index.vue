@@ -116,6 +116,7 @@ import LayNotice from "@/layout/components/lay-notice/index.vue";
 // 组合式函数
 const {
   isMobile,
+  sidebarOpened,
   toggleSideBar,
   isFullscreen,
   toggleFullScreen,

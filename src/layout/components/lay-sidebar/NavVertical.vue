@@ -4,7 +4,10 @@
     <SidebarLogo v-if="showLogo" />
 
     <!-- 菜单区域 -->
-    <el-scrollbar class="sidebar-scrollbar">
+    <el-scrollbar
+      class="sidebar-scrollbar"
+      :class="{ 'no-scroll': !sidebarOpened && !isMobile }"
+    >
       <el-menu
         :default-active="activeMenu"
         :collapse="!sidebarOpened"
@@ -23,8 +26,8 @@
       </el-menu>
     </el-scrollbar>
 
-    <!-- 折叠按钮 -->
-    <div class="sidebar-collapse">
+    <!-- 折叠按钮（桌面端始终显示） -->
+    <div v-if="!isMobile" class="sidebar-collapse">
       <el-button
         text
         circle
@@ -37,27 +40,34 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { useNav } from "@/layout/hooks/useNav";
 import { useLayout } from "@/layout/hooks/useLayout";
 import SidebarLogo from "@/layout/components/lay-sidebar/SidebarLogo.vue";
 import SidebarItem from "@/layout/components/lay-sidebar/SidebarItem.vue";
+import { constantRoutes } from "@/router/routes";
 
 // 组合式函数
-const { sidebarOpened, toggleSideBar } = useNav();
+const { sidebarOpened, toggleSideBar, isMobile } = useNav();
 const { layoutConfig } = useLayout();
+const router = useRouter();
 
-// 模拟菜单数据
-const menuRoutes = computed(() => [
-  {
-    path: "/home",
-    name: "Home",
-    meta: {
-      title: "首页",
-      icon: "HomeFilled"
-    }
-  }
-]);
+// 菜单路由数据
+const menuRoutes = computed(() => {
+  // 从路由配置中获取布局路由的子路由
+  const layoutRoute = constantRoutes.find(route => route.path === "/");
+  const children = layoutRoute?.children || [];
+
+  // 过滤隐藏的路由并转换为MenuItem格式
+  return children
+    .filter((route: any) => !route.meta?.hidden)
+    .map((route: any) => ({
+      path: route.path,
+      name: route.name || route.path,
+      meta: route.meta
+    }));
+});
 
 // 计算属性
 const sidebarClasses = computed(() => [
@@ -69,8 +79,8 @@ const sidebarClasses = computed(() => [
 ]);
 
 const activeMenu = computed(() => {
-  // 简化处理，默认激活首页
-  return "/home";
+  // 获取当前路由路径
+  return router.currentRoute.value.path;
 });
 
 const showLogo = computed(() => {
@@ -102,6 +112,13 @@ const showLogo = computed(() => {
         text-align: center;
       }
     }
+
+    // 折叠状态下确保菜单区域内容不超出
+    .sidebar-scrollbar {
+      :deep(.el-scrollbar__view) {
+        min-height: auto;
+      }
+    }
   }
 
   .sidebar-scrollbar {
@@ -110,6 +127,17 @@ const showLogo = computed(() => {
 
     :deep(.el-scrollbar__wrap) {
       overflow-x: hidden;
+    }
+
+    // 桌面端折叠时隐藏滚动条
+    &.no-scroll {
+      :deep(.el-scrollbar__wrap) {
+        overflow-y: hidden;
+      }
+
+      :deep(.el-scrollbar__bar) {
+        display: none;
+      }
     }
   }
 
@@ -153,10 +181,16 @@ const showLogo = computed(() => {
     align-items: center;
     justify-content: center;
     border-top: 1px solid var(--el-border-color-light);
+    background: var(--el-bg-color);
 
     .el-button {
       width: 36px;
       height: 36px;
+
+      &:hover {
+        background-color: var(--el-color-primary-light-9);
+        color: var(--el-color-primary);
+      }
     }
   }
 }
@@ -164,10 +198,22 @@ const showLogo = computed(() => {
 // 移动端适配
 @media (max-width: 768px) {
   .sidebar-container {
+    transform: translateX(-100%);
     transition: transform 0.3s;
 
-    &:not(.sidebar-opened) {
-      transform: translateX(-100%);
+    &.sidebar-opened {
+      transform: translateX(0);
+    }
+
+    // 移动端必须保持滚动功能
+    .sidebar-scrollbar.no-scroll {
+      :deep(.el-scrollbar__wrap) {
+        overflow-y: auto !important;
+      }
+
+      :deep(.el-scrollbar__bar) {
+        display: block !important;
+      }
     }
   }
 }

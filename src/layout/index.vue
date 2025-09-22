@@ -21,7 +21,7 @@
       </div>
 
       <!-- 内容区域 -->
-      <LayContent />
+      <LayContent :style="{ 'padding-top': contentPaddingTop }" />
 
       <!-- 页脚 -->
       <LayFooter v-if="!layoutConfig.hideFooter" />
@@ -88,7 +88,20 @@ const showSidebar = computed(() => {
 
 // 是否显示头部
 const showHeader = computed(() => {
-  return layoutConfig.value.layout !== "vertical" || !isMobile.value;
+  return (
+    layoutConfig.value.layout !== "vertical" ||
+    layoutConfig.value.layout === "vertical"
+  );
+});
+
+// 计算内容区域的顶部边距
+const contentPaddingTop = computed(() => {
+  if (!showHeader.value) return "0";
+
+  // 导航栏高度 + 标签栏高度
+  const navbarHeight = 50;
+  const tagHeight = layoutConfig.value.hideTabs ? 0 : 40;
+  return `${navbarHeight + tagHeight}px`;
 });
 
 // 窗口大小变化处理
@@ -144,6 +157,12 @@ onUnmounted(() => {
         transition: margin-left 0.3s;
       }
     }
+
+    &.mobile {
+      .main-container {
+        margin-left: 0;
+      }
+    }
   }
 
   &.sidebar-closed {
@@ -163,6 +182,13 @@ onUnmounted(() => {
     .main-container {
       transition: none;
     }
+
+    // 禁止头部动画
+    &.fixed-header {
+      .layout-header {
+        transition: none;
+      }
+    }
   }
 
   &.vertical {
@@ -179,6 +205,13 @@ onUnmounted(() => {
       margin-left: 0;
       flex: 1;
     }
+
+    // 水平布局下头部不需要调整left
+    &.fixed-header {
+      .layout-header {
+        left: 0;
+      }
+    }
   }
 
   &.mix {
@@ -189,11 +222,81 @@ onUnmounted(() => {
         margin-left: 210px;
       }
     }
+
+    // 混合布局下的头部定位调整
+    &.fixed-header {
+      .layout-header {
+        left: 0;
+      }
+
+      &.has-sidebar {
+        .layout-header {
+          left: 210px;
+        }
+      }
+    }
   }
 
   &.stretch {
     .main-container {
       margin-left: 0;
+    }
+
+    // 拉伸模式下头部占满宽度
+    &.fixed-header {
+      .layout-header {
+        left: 0;
+      }
+    }
+  }
+
+  // 固定头部的通用样式
+  .main-container.fixed-header {
+    .layout-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--el-bg-color);
+      border-bottom: 1px solid var(--el-border-color-light);
+      // 默认侧边栏展开状态
+      left: 210px;
+      transition: left 0.3s;
+    }
+  }
+
+  // 侧边栏收缩时调整头部位置
+  &.sidebar-closed .main-container.fixed-header {
+    .layout-header {
+      left: 64px;
+    }
+  }
+
+  // 移动端时头部占满宽度
+  &.mobile .main-container.fixed-header {
+    .layout-header {
+      left: 0 !important;
+    }
+  }
+
+  // 水平布局下头部不需要调整left
+  &.horizontal .main-container.fixed-header {
+    .layout-header {
+      left: 0 !important;
+    }
+  }
+
+  // 拉伸模式下头部占满宽度
+  &.stretch .main-container.fixed-header {
+    .layout-header {
+      left: 0 !important;
+    }
+  }
+
+  // 禁止头部动画
+  &.without-animation .main-container.fixed-header {
+    .layout-header {
+      transition: none;
     }
   }
 }
@@ -220,16 +323,6 @@ onUnmounted(() => {
     z-index: 100;
     background: var(--el-bg-color);
     border-bottom: 1px solid var(--el-border-color-light);
-  }
-
-  &.fixed-header {
-    .layout-header {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 100;
-    }
   }
 
   &.no-tags {

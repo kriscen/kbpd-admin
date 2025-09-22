@@ -115,6 +115,7 @@ const {
   activeTagPath,
   contextMenu,
   contextMenuItems,
+  addTag,
   removeTag,
   removeOtherTags,
   removeLeftTags,
@@ -124,7 +125,8 @@ const {
   showContextMenu,
   hideContextMenu,
   initTags,
-  addCurrentRouteTag
+  addCurrentRouteTag,
+  cleanDuplicateTags
 } = useTag();
 
 const { layoutConfig } = useLayout();
@@ -223,19 +225,42 @@ const scrollToActiveTag = () => {
 };
 
 // 监听路由变化
+router.beforeEach(to => {
+  // 在路由跳转前添加标签，但避免重复添加
+  if (to.path && to.meta?.title) {
+    const existingTag = tagsList.value.find(tag => tag.path === to.path);
+    if (!existingTag) {
+      const tag: any = {
+        path: to.path,
+        name: to.name as string,
+        title: to.meta.title as string,
+        keepAlive: to.meta.keepAlive as boolean,
+        affix: to.meta.affix as boolean,
+        close: !to.meta.affix
+      };
+      addTag(tag);
+    }
+  }
+});
+
 router.afterEach(() => {
-  addCurrentRouteTag();
   scrollToActiveTag();
 });
 
 // 生命周期
 onMounted(() => {
   initTags();
-  addCurrentRouteTag();
+  // 移除重复的addCurrentRouteTag调用，因为router.beforeEach已经处理了
   scrollToActiveTag();
 
   // 添加全局点击事件监听
   document.addEventListener("click", hideContextMenu);
+
+  // 开发环境下暴露清理函数
+  if (import.meta.env.DEV) {
+    (window as any).cleanTags = cleanDuplicateTags;
+    console.log("开发模式：可使用 window.cleanTags() 清理重复标签");
+  }
 });
 
 onUnmounted(() => {
