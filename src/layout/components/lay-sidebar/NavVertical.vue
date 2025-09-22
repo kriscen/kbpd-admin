@@ -37,7 +37,6 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useRoute } from "vue-router";
 import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { useNav } from "@/layout/hooks/useNav";
 import { useLayout } from "@/layout/hooks/useLayout";
@@ -47,32 +46,15 @@ import SidebarItem from "@/layout/components/lay-sidebar/SidebarItem.vue";
 // 组合式函数
 const { sidebarOpened, toggleSideBar } = useNav();
 const { layoutConfig } = useLayout();
-const route = useRoute();
 
 // 模拟菜单数据
 const menuRoutes = computed(() => [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     meta: {
       title: "首页",
       icon: "HomeFilled"
-    }
-  },
-  {
-    path: "/login",
-    name: "Login",
-    meta: {
-      title: "登录",
-      icon: "User"
-    }
-  },
-  {
-    path: "/404",
-    name: "404",
-    meta: {
-      title: "404页面",
-      icon: "WarningFilled"
     }
   }
 ]);
@@ -87,11 +69,8 @@ const sidebarClasses = computed(() => [
 ]);
 
 const activeMenu = computed(() => {
-  const { meta, path } = route;
-  if (meta?.activeMenu) {
-    return meta.activeMenu as string;
-  }
-  return path;
+  // 简化处理，默认激活首页
+  return "/home";
 });
 
 const showLogo = computed(() => {

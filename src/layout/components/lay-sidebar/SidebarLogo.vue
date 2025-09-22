@@ -4,13 +4,18 @@
     :class="{ 'sidebar-logo-collapsed': !sidebarOpened }"
   >
     <router-link to="/" class="logo-link">
-      <img src="/logo.svg" alt="Logo" class="logo-image" />
+      <div class="logo-icon">
+        <el-icon size="32" color="var(--el-color-primary)">
+          <HomeFilled />
+        </el-icon>
+      </div>
       <span v-show="sidebarOpened" class="logo-title">KBPD Admin</span>
     </router-link>
   </div>
 </template>
 
 <script setup lang="ts">
+import { HomeFilled } from "@element-plus/icons-vue";
 import { useNav } from "@/layout/hooks/useNav";
 
 const { sidebarOpened } = useNav();
@@ -33,10 +38,11 @@ const { sidebarOpened } = useNav();
     transition: all 0.3s;
     padding: 0 16px;
 
-    .logo-image {
-      width: 32px;
-      height: 32px;
+    .logo-icon {
       margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .logo-title {
@@ -55,7 +61,7 @@ const { sidebarOpened } = useNav();
     .logo-link {
       justify-content: center;
 
-      .logo-image {
+      .logo-icon {
         margin-right: 0;
       }
     }

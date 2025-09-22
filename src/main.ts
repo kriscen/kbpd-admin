@@ -8,6 +8,7 @@ import gloablComponent from "@/components/index";
 import "@/styles/index.scss";
 import router from "@/router";
 import { createPinia } from "pinia";
+import { useUserStore } from "@/store/user";
 
 const pinia = createPinia();
 
@@ -18,4 +19,9 @@ app.use(ElementPlus, {
 app.use(gloablComponent);
 app.use(router);
 app.use(pinia);
+
+// 初始化用户状态
+const userStore = useUserStore();
+userStore.initUserState();
+
 app.mount("#app");
