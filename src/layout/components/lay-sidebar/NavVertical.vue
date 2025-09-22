@@ -39,10 +39,10 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
-import { useNav } from "../../hooks/useNav";
-import { useLayout } from "../../hooks/useLayout";
-import SidebarLogo from "./SidebarLogo.vue";
-import SidebarItem from "./SidebarItem.vue";
+import { useNav } from "@/layout/hooks/useNav";
+import { useLayout } from "@/layout/hooks/useLayout";
+import SidebarLogo from "@/layout/components/lay-sidebar/SidebarLogo.vue";
+import SidebarItem from "@/layout/components/lay-sidebar/SidebarItem.vue";
 
 // 组合式函数
 const { sidebarOpened, toggleSideBar } = useNav();

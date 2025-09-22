@@ -106,8 +106,8 @@ import {
   Right,
   FolderDelete
 } from "@element-plus/icons-vue";
-import { useTag } from "../../hooks/useTag";
-import { useLayout } from "../../hooks/useLayout";
+import { useTag } from "@/layout/hooks/useTag";
+import { useLayout } from "@/layout/hooks/useLayout";
 
 // 组合式函数
 const {
@@ -115,7 +115,6 @@ const {
   activeTagPath,
   contextMenu,
   contextMenuItems,
-  addTag,
   removeTag,
   removeOtherTags,
   removeLeftTags,

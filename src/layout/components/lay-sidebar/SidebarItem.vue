@@ -45,7 +45,7 @@ import {
   Operation,
   Menu as MenuIcon
 } from "@element-plus/icons-vue";
-import type { MenuItem } from "../../types";
+import type { MenuItem } from "@/layout/types";
 
 interface Props {
   item: MenuItem;

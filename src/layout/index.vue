@@ -34,17 +34,17 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { useLayout } from "./hooks/useLayout";
-import { useNav } from "./hooks/useNav";
-import { useDataThemeChange } from "./hooks/useDataThemeChange";
+import { useLayout } from "@/layout/hooks/useLayout";
+import { useNav } from "@/layout/hooks/useNav";
+import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
 
 // 导入组件
-import NavVertical from "./components/lay-sidebar/NavVertical.vue";
-import LayNavbar from "./components/lay-navbar/index.vue";
-import LayTag from "./components/lay-tag/index.vue";
-import LayContent from "./components/lay-content/index.vue";
-import LayFooter from "./components/lay-footer/index.vue";
-import LaySetting from "./components/lay-setting/index.vue";
+import NavVertical from "@/layout/components/lay-sidebar/NavVertical.vue";
+import LayNavbar from "@/layout/components/lay-navbar/index.vue";
+import LayTag from "@/layout/components/lay-tag/index.vue";
+import LayContent from "@/layout/components/lay-content/index.vue";
+import LayFooter from "@/layout/components/lay-footer/index.vue";
+import LaySetting from "@/layout/components/lay-setting/index.vue";
 
 // 组合式函数
 const { layoutConfig, initStorage } = useLayout();

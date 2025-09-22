@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNav } from "../../hooks/useNav";
+import { useNav } from "@/layout/hooks/useNav";
 
 const { sidebarOpened } = useNav();
 </script>

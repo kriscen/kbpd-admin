@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useLayout } from "../../hooks/useLayout";
+import { useLayout } from "@/layout/hooks/useLayout";
 
 // 组合式函数
 const { layoutConfig } = useLayout();

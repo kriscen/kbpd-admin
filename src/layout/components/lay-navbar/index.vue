@@ -118,10 +118,10 @@ import {
   SwitchButton
 } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import { useNav } from "../../hooks/useNav";
-import { useLayout } from "../../hooks/useLayout";
-import LaySearch from "../lay-search/index.vue";
-import LayNotice from "../lay-notice/index.vue";
+import { useNav } from "@/layout/hooks/useNav";
+import { useLayout } from "@/layout/hooks/useLayout";
+import LaySearch from "@/layout/components/lay-search/index.vue";
+import LayNotice from "@/layout/components/lay-notice/index.vue";
 
 // 组合式函数
 const {

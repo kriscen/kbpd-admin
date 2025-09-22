@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useLayout } from "../../hooks/useLayout";
+import { useLayout } from "@/layout/hooks/useLayout";
 
 const { layoutConfig } = useLayout();
 

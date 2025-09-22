@@ -161,7 +161,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import {
   Grid,
   Sunny,
@@ -171,9 +171,9 @@ import {
   RefreshLeft
 } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import { useLayout } from "../../hooks/useLayout";
-import { useDataThemeChange } from "../../hooks/useDataThemeChange";
-import type { LayoutType, OverallStyleType } from "../../types";
+import { useLayout } from "@/layout/hooks/useLayout";
+import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
+import type { LayoutType, OverallStyleType } from "@/layout/types";
 
 // 组合式函数
 const {
