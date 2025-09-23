@@ -1,5 +1,5 @@
 <template>
-  <div class="content-404">
+  <div class="error-container">
     <div class="error-content">
       <div class="error-image">
         <el-icon size="120" color="#909399">
@@ -43,23 +43,21 @@ const goBack = () => {
 </script>
 
 <style scoped lang="scss">
-.content-404 {
-  min-height: calc(100vh - 140px); // 减去头部和标签页高度
+.error-container {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--el-bg-color-page);
-  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 
   .error-content {
     text-align: center;
     padding: 60px 40px;
-    background: var(--el-bg-color);
+    background: white;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     margin: 20px;
-    border: 1px solid var(--el-border-color-lighter);
 
     .error-image {
       margin-bottom: 30px;
@@ -111,10 +109,7 @@ const goBack = () => {
 
 // 移动端适配
 @media (max-width: 768px) {
-  .content-404 {
-    padding: 20px 12px;
-    min-height: calc(100vh - 100px);
-
+  .error-container {
     .error-content {
       padding: 40px 24px;
       margin: 12px;
@@ -144,13 +139,6 @@ const goBack = () => {
         }
       }
     }
-  }
-}
-
-// 暗色主题适配
-.dark .content-404 {
-  .error-content {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   }
 }
 </style>

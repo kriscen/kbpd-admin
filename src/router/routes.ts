@@ -40,16 +40,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: "debug",
-        component: () => import("@/views/debug/index.vue"),
-        name: "Debug",
-        meta: {
-          title: "调试页面",
-          icon: "Setting",
-          requiresAuth: true
-        }
-      },
-      {
         path: "404-content",
         component: () => import("@/views/404/content.vue"),
         name: "404Content",
