@@ -1,23 +1,36 @@
-# Vue Admin 管理系统
+# KBPD Admin 管理系统
 
-基于 Vue 3 + TypeScript + Vite 构建的现代化管理系统模板。
+> 基于 Vue 3 + TypeScript + Vite 构建的现代化管理系统，支持双模式登录认证与完整的权限管理
 
-## ✨ 特性
+## ✨ 核心特性
 
-- 🚀 **Vue 3** - 使用最新的 Vue 3 Composition API
-- 🔥 **TypeScript** - 完整的 TypeScript 支持
-- ⚡ **Vite** - 极速的开发体验
-- 🎨 **Element Plus** - 优秀的 Vue 3 UI 组件库
-- 📦 **自动导入** - API 和组件自动导入
-- 🎯 **Mock 数据** - 内置 Mock 数据支持
-- 🔧 **代码规范** - ESLint + Prettier + Stylelint
-- 🐶 **Git 钩子** - Husky + 提交规范检查
-- 📱 **响应式设计** - 支持移动端适配
+- 🔐 **双模式认证** - Mock开发模式 + OAuth2生产模式
+- 👥 **权限管理** - 基于角色的菜单权限和按钮权限控制
+- 🎨 **响应式布局** - 支持垂直/水平/混合三种布局模式
+- 🏷️ **智能标签页** - 标签页缓存、右键菜单、持久化存储
+- 🌙 **主题系统** - 明暗主题切换 + 自定义主题色
+- 📱 **移动端适配** - 完美适配桌面端、平板端、移动端
+- 🚀 **现代技术栈** - Vue 3 + TypeScript + Pinia + Element Plus
+- ⚡ **开发体验** - Vite构建 + 自动导入 + Mock数据 + 热重载
+
+## 📖 文档导航
+
+| 文档类型            | 链接                                                                 | 描述                         |
+| ------------------- | -------------------------------------------------------------------- | ---------------------------- |
+| 🚀 **快速入门**     | [QUICK_START_GUIDE.md](./doc/QUICK_START_GUIDE.md)                   | 5分钟快速上手指南            |
+| 📚 **完整设计文档** | [COMPREHENSIVE_DESIGN_GUIDE.md](./doc/COMPREHENSIVE_DESIGN_GUIDE.md) | 系统设计、技术架构、开发指南 |
+| 🎨 **布局配置**     | [LAYOUT_CONFIG_GUIDE.md](./doc/LAYOUT_CONFIG_GUIDE.md)               | 布局系统配置说明             |
+| 🏠 **首页说明**     | [HOME_LAYOUT_GUIDE.md](./doc/HOME_LAYOUT_GUIDE.md)                   | 首页功能使用指南             |
+| 🔐 **登录测试**     | [LOGIN_TEST_GUIDE.md](./doc/LOGIN_TEST_GUIDE.md)                     | 登录功能测试指南             |
+| 🔍 **代码审查**     | [CODE_REVIEW.md](./doc/CODE_REVIEW.md)                               | 代码质量评估报告             |
+
+## 🚀 快速开始
 
 ## 🛠️ 技术栈
 
 - **框架**: Vue 3.5+
 - **语言**: TypeScript 5.8+
+- **状态管理**: Pinia 3.0+
 - **构建工具**: Vite 6.3+
 - **UI 框架**: Element Plus 2.9+
 - **路由**: Vue Router 4.5+
@@ -32,7 +45,6 @@
 # 克隆项目
 git clone <repository-url>
 
-# 进入项目目录
 cd kbpd-admin
 
 # 安装依赖
@@ -48,120 +60,104 @@ yarn install
 ## 🚀 开发
 
 ```bash
-# 启动开发服务器
-pnpm dev
-
-# 或
+# 启动开发服务器 (默认使用Mock模式)
 npm run dev
+
+# 启动生产模式服务器
+npm run build && npm run preview
 ```
 
 启动后访问 http://localhost:5173
 
+## 🧪 测试登录
+
+系统支持两种登录模式：
+
+### Mock模式 (开发环境默认)
+
+- **账号**: admin
+- **密码**: 111111
+- **角色**: 平台管理员
+
+或者
+
+- **账号**: system
+- **密码**: 111111
+- **角色**: 系统管理员
+
+### OAuth2模式 (生产环境)
+
+点击登录页面的OAuth2登录按钮，跳转到认证中心进行登录。
+
 ## 📦 构建
 
 ```bash
+# 构建开发环境
+npm run build:dev
+
 # 构建生产环境
-pnpm build
+npm run build:prod
 
 # 预览构建结果
-pnpm preview
+npm run preview
 ```
 
 ## 📋 代码规范
 
 ```bash
 # ESLint 检查
-pnpm lint
+npm run lint
 
 # ESLint 自动修复
-pnpm fix
+npm run fix
 
 # 格式化代码
-pnpm format
+npm run format
 
 # Stylelint 检查
-pnpm lint:style
+npm run lint:style
 ```
 
 ## 📁 项目结构
 
 ```
-├── .husky                      # 代码提交前校验配置文件
-├── .vscode                     # IDE 工具推荐配置文件
-│   ├── settings.json          # 设置扩展程序或 vscode 编辑器的一些属性
-│   └── vue3.0.code-snippets   # vue3.0 代码片段
-├── build                       # 构建工具
-│   ├── cdn.ts                 # 打包时采用 cdn 模式
-│   ├── compress.ts            # 打包时启用 gzip 压缩或 brotli 压缩
-│   ├── info.ts                # 输出打包信息（大小、用时）
-│   ├── optimize.ts            # vite 依赖预构建配置项
-│   ├── plugins.ts             # vite 相关插件存放处
-│   └── utils.ts               # 构建工具常用方法抽离
-├── mock                        # mock 模拟后台数据
-│   ├── asyncRoutes.ts         # 模拟后台返回动态路由
-│   └── user.ts                # 用户相关 mock 数据
-├── public                      # 静态资源
-│   ├── audio                  # 音频文件
-│   ├── html                   # 静态 iframe 页面
-│   ├── wasm                   # wasm 文件以及胶水代码
-│   ├── favicon.ico            # favicon
-│   ├── logo.svg               # logo
-│   └── platform-config.json   # 全局配置文件（打包后修改也可生效）
-├── src
-│   ├── api                    # 接口请求统一管理
-│   │   └── sys/user           # 用户相关接口
-│   ├── assets                 # 字体、图片等静态资源
-│   ├── components             # 自定义通用组件
-│   │   ├── SvgIcon            # SVG 图标组件
-│   │   └── index.ts           # 组件导出
-│   ├── config                 # 获取平台动态全局配置
-│   ├── directives             # 自定义指令
-│   ├── layout                 # 主要页面布局
-│   ├── plugins                # 处理一些库或插件，导出更方便的 api
-│   ├── router                 # 路由配置
-│   │   ├── index.ts           # 路由主配置
-│   │   └── routes.ts          # 路由定义
-│   ├── store                  # pinia 状态管理
-│   ├── styles                 # 全局样式
-│   │   ├── index.scss         # 样式入口文件
-│   │   ├── reset.scss         # 重置样式
-│   │   └── variable.scss      # 样式变量
-│   ├── utils                  # 全局工具方法
-│   │   └── request.ts         # 请求封装
-│   ├── views                  # 存放编写业务代码页面
-│   │   ├── 404                # 404 页面
-│   │   ├── home               # 首页
-│   │   └── login              # 登录页
-│   ├── App.vue                # 入口页面
-│   ├── main.ts                # 入口文件
-│   └── vite-env.d.ts          # vite 环境类型声明
-├── types                       # 全局 TS 类型配置
-│   ├── directives.d.ts        # 全局自定义指令类型声明
-│   ├── global-components.d.ts # 自定义全局组件类型声明
-│   ├── global.d.ts            # 全局类型声明
-│   ├── index.d.ts             # 零散的全局类型声明
-│   ├── router.d.ts            # 全局路由类型声明
-│   ├── shims-tsx.d.ts         # tsx 文件类型支持
-│   ├── shims-vue.d.ts         # vue 文件类型支持
-│   └── virtual.d.ts           # 虚拟模块类型声明
-├── .env                        # 全局环境变量配置
-├── .env.development           # 开发环境变量配置
-├── .gitignore                 # git 提交忽略文件
-├── .prettierignore            # prettier 语法检查忽略文件
-├── .prettierrc.js             # prettier 插件配置
-├── auto-imports.d.ts          # 自动导入类型声明
-├── components.d.ts            # 组件自动导入类型声明
-├── commitlint.config.js       # git 提交前检查配置
-├── eslint.config.js           # eslint 语法检查配置
-├── index.html                 # html 主入口
-├── package.json               # 依赖包管理以及命令配置
-├── pnpm-lock.yaml             # pnpm 锁定文件
-├── README.md                  # 项目说明文档
-├── stylelint.config.js        # stylelint 配置
-├── tsconfig.json              # typescript 配置
-├── tsconfig.app.json          # 应用 typescript 配置
-├── tsconfig.node.json         # node typescript 配置
-└── vite.config.ts             # vite 配置
+src/
+├── api/                    # API接口层
+│   └── sys/               # 系统模块API
+│       ├── user/          # 用户相关接口
+│       └── menu/          # 菜单相关接口
+├── components/            # 通用组件
+│   ├── SvgIcon/          # SVG图标组件
+│   └── index.ts          # 组件导出
+├── config/               # 配置文件
+│   └── index.ts          # 应用配置
+├── layout/               # 布局系统
+│   ├── components/       # 布局组件
+│   ├── hooks/           # 布局钩子函数
+│   ├── styles/          # 布局样式
+│   └── types.ts         # 布局类型定义
+├── router/              # 路由配置
+│   ├── index.ts         # 路由实例
+│   ├── routes.ts        # 路由配置
+│   └── dynamicRoutes.ts # 动态路由
+├── store/               # 状态管理
+│   ├── user.ts          # 用户状态
+│   └── menu.ts          # 菜单状态
+├── styles/              # 全局样式
+├── utils/               # 工具函数
+│   ├── request.ts       # 请求封装
+│   ├── env.ts           # 环境配置
+│   ├── errorHandler.ts  # 错误处理
+│   └── routePermission.ts # 路由权限
+├── views/               # 页面组件
+│   ├── login/           # 登录页面
+│   ├── home/            # 首页
+│   ├── system/          # 系统管理
+│   ├── content/         # 内容管理
+│   └── 404/             # 404页面
+├── App.vue              # 根组件
+├── main.ts              # 应用入口
+└── vite-env.d.ts        # 类型声明
 ```
 
 ## 🔧 配置说明
@@ -170,29 +166,27 @@ pnpm lint:style
 
 项目支持多环境配置:
 
-- `.env` - 全局环境变量
-- `.env.development` - 开发环境变量
-- `.env.production` - 生产环境变量
-- `.env.staging` - 预发布环境变量
+- `.env.dev` - 开发环境变量 (默认使用Mock模式)
+- `.env.prod` - 生产环境变量 (默认使用OAuth2模式)
 
-### 代码规范
+### 登录模式切换
 
-项目集成了完整的代码规范配置：
+```bash
+# .env.dev 或 .env.prod
+VITE_LOGIN_MODE=mock     # Mock开发模式
+VITE_LOGIN_MODE=oauth2   # OAuth2生产模式
+```
 
-- **ESLint**: JavaScript/TypeScript 代码检查
-- **Prettier**: 代码格式化
-- **Stylelint**: CSS/SCSS 样式检查
-- **Husky**: Git 钩子管理
-- **Commitlint**: 提交信息规范检查
+### OAuth2配置
 
-### 自动导入
-
-项目配置了 API 和组件的自动导入，无需手动引入：
-
-- Vue 相关 API（ref, reactive, computed 等）
-- Vue Router API
-- Element Plus 组件
-- 自定义组件
+```bash
+# OAuth2相关配置
+VITE_OAUTH2_AUTH_URL=https://your-oauth2-server.com/oauth2/authorize
+VITE_OAUTH2_TOKEN_URL=https://your-oauth2-server.com/oauth2/token
+VITE_OAUTH2_CLIENT_ID=your-client-id
+VITE_OAUTH2_REDIRECT_URI=http://localhost:5173/auth/callback
+VITE_OAUTH2_SCOPE=read write
+```
 
 ## 🤝 贡献
 
