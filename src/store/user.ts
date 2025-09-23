@@ -118,6 +118,9 @@ export const useUserStore = defineStore("user", () => {
           "user-info",
           JSON.stringify(result.data.checkUser)
         );
+
+        // 获取用户信息成功后，在组件中手动加载菜单数据
+
         return { success: true, data: result.data.checkUser };
       } else {
         ElMessage.error(result.message || "获取用户信息失败");
@@ -159,6 +162,8 @@ export const useUserStore = defineStore("user", () => {
 
   // 登出
   const logout = () => {
+    // 清空菜单数据在组件中处理
+
     clearAuthInfo();
     ElMessage.success("退出登录成功");
   };

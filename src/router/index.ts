@@ -2,9 +2,11 @@ import {
   createRouter,
   createWebHistory,
   type RouteLocationNormalized,
-  type NavigationGuardNext
+  type NavigationGuardNext,
+  type RouteRecordRaw
 } from "vue-router";
 import { constantRoutes } from "./routes";
+import { dynamicRoutes } from "./dynamicRoutes";
 import { ElMessage } from "element-plus";
 import {
   isWhiteList,
@@ -25,6 +27,66 @@ const router = createRouter({
     };
   }
 });
+
+// 动态路由添加状态
+let routesAdded = false;
+
+// 动态添加路由
+export const addDynamicRoutes = (menuRoutes: RouteRecordRaw[]) => {
+  if (routesAdded) {
+    console.log("路由已添加，跳过重复添加");
+    return;
+  }
+
+  // 获取主布局路由
+  const mainRoute = router.getRoutes().find(route => route.path === "/");
+  if (!mainRoute) {
+    console.error("未找到主布局路由");
+    return;
+  }
+
+  // 添加动态路由到主布局的children中
+  menuRoutes.forEach(route => {
+    // 如果是子路由，添加到主布局下
+    if (!route.path.startsWith("/") || route.path === "/home") {
+      return; // 跳过首页，已在constantRoutes中定义
+    }
+
+    try {
+      router.addRoute("/", route);
+      console.log(`添加路由: ${route.path}`);
+    } catch (error) {
+      console.error(`添加路由失败: ${route.path}`, error);
+    }
+  });
+
+  routesAdded = true;
+  console.log("动态路由添加完成");
+};
+
+// 清除动态路由
+export const clearDynamicRoutes = () => {
+  // 移除所有动态添加的路由
+  const routes = router.getRoutes();
+  routes.forEach(route => {
+    // 如果路由在dynamicRoutes中定义且不是constantRoutes中的路由，则移除
+    const isDynamic = dynamicRoutes.some(dr => dr.name === route.name);
+    const isConstant = constantRoutes.some(cr => {
+      if (cr.children) {
+        return cr.children.some((child: any) => child.name === route.name);
+      }
+      return cr.name === route.name;
+    });
+
+    if (isDynamic && !isConstant && route.name !== "Home") {
+      router.removeRoute(route.name!);
+      console.log(`移除路由: ${route.path}`);
+    }
+  });
+
+  routesAdded = false;
+  console.log("动态路由清除完成");
+};
 
 // 路由守卫
 // 为了避免循环依赖，这里直接使用localStorage

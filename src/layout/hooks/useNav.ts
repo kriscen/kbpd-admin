@@ -60,18 +60,21 @@ export function useNav() {
     isFullscreen.value = !!document.fullscreenElement;
   });
 
-  // 退出登录
+  // 退出登录 - 保留但不推荐使用，建议使用userStore.logout()
   const logout = () => {
-    // 清除用户信息和token
+    // 清除本地状态
     userInfo.value = {
       username: "",
       avatar: "",
       roles: []
     };
-    localStorage.removeItem("token");
+
+    // 清除所有认证相关的localStorage
+    localStorage.removeItem("user-token");
+    localStorage.removeItem("user-refresh-token");
     localStorage.removeItem("user-info");
 
-    // 跳转到登录页
+    // 直接刷新页面到登录页
     window.location.href = "/login";
   };
 

@@ -5,9 +5,13 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { viteMockServe } from "vite-plugin-mock";
 import path from "path";
+import { defineConfig } from "vite";
 
 // https://vite.dev/config/
-export default () => {
+export default defineConfig(({ command, mode }) => {
+  // 根据环境变量决定是否启用Mock
+  const enableMock = process.env.VITE_ENABLE_MOCK === "true" || mode === "dev";
+
   return {
     plugins: [
       vue(),
@@ -24,9 +28,10 @@ export default () => {
         symbolId: "icon-[dir]-[name]"
       }),
       viteMockServe({
-        // vite-plugin-mock的配置项
         mockPath: "mock",
-        enable: true
+        enable: enableMock,
+        watchFiles: true,
+        logger: true
       })
     ],
     resolve: {
@@ -42,4 +47,4 @@ export default () => {
       }
     }
   };
-};
+});

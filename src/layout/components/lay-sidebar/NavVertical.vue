@@ -39,34 +39,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { useNav } from "@/layout/hooks/useNav";
 import { useLayout } from "@/layout/hooks/useLayout";
+import { useMenuStore } from "@/store/menu";
 import SidebarLogo from "@/layout/components/lay-sidebar/SidebarLogo.vue";
 import SidebarItem from "@/layout/components/lay-sidebar/SidebarItem.vue";
-import { constantRoutes } from "@/router/routes";
 
 // 组合式函数
 const { sidebarOpened, toggleSideBar, isMobile } = useNav();
 const { layoutConfig } = useLayout();
+const menuStore = useMenuStore();
 const router = useRouter();
 
 // 菜单路由数据
 const menuRoutes = computed(() => {
-  // 从路由配置中获取布局路由的子路由
-  const layoutRoute = constantRoutes.find(route => route.path === "/");
-  const children = layoutRoute?.children || [];
-
-  // 过滤隐藏的路由并转换为MenuItem格式
-  return children
-    .filter((route: any) => !route.meta?.hidden)
-    .map((route: any) => ({
-      path: route.path,
-      name: route.name || route.path,
-      meta: route.meta
-    }));
+  return menuStore.sidebarMenus;
 });
 
 // 计算属性
@@ -85,6 +75,36 @@ const activeMenu = computed(() => {
 
 const showLogo = computed(() => {
   return !layoutConfig.value.hideLogo;
+});
+
+// 组件挂载时加载菜单
+onMounted(async () => {
+  // 检查用户是否登录和菜单是否已加载
+  const token = localStorage.getItem("user-token");
+  const userInfo = localStorage.getItem("user-info");
+
+  if (token && userInfo && !menuStore.isMenuLoaded) {
+    console.log("开始加载菜单数据...");
+    try {
+      const result = await menuStore.fetchMenuList();
+      if (result.success) {
+        console.log("菜单加载成功:", result.data);
+      } else {
+        console.error("菜单加载失败:", result.message);
+      }
+    } catch (error) {
+      console.error("菜单加载异常:", error);
+    }
+  } else {
+    console.log(
+      "跳过菜单加载 - token:",
+      !!token,
+      "userInfo:",
+      !!userInfo,
+      "isMenuLoaded:",
+      menuStore.isMenuLoaded
+    );
+  }
 });
 </script>
 

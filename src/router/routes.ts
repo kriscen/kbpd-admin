@@ -1,5 +1,7 @@
+import type { RouteRecordRaw } from "vue-router";
+
 //对外暴露配置的常量路由
-export const constantRoutes = [
+export const constantRoutes: RouteRecordRaw[] = [
   {
     //登录
     path: "/login",
@@ -36,7 +38,18 @@ export const constantRoutes = [
           requiresAuth: true,
           affix: true
         }
+      },
+      {
+        path: "debug",
+        component: () => import("@/views/debug/index.vue"),
+        name: "Debug",
+        meta: {
+          title: "调试页面",
+          icon: "Setting",
+          requiresAuth: true
+        }
       }
+      // 动态路由将在这里添加
     ]
   },
   {

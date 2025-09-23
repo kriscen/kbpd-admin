@@ -110,6 +110,7 @@ import {
 } from "@element-plus/icons-vue";
 import { useNav } from "@/layout/hooks/useNav";
 import { useLayout } from "@/layout/hooks/useLayout";
+import { useUserStore } from "@/store/user";
 import LaySearch from "@/layout/components/lay-search/index.vue";
 import LayNotice from "@/layout/components/lay-notice/index.vue";
 
@@ -121,10 +122,10 @@ const {
   isFullscreen,
   toggleFullScreen,
   userInfo,
-  userAvatar,
-  logout
+  userAvatar
 } = useNav();
 const { layout } = useLayout();
+const userStore = useUserStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -168,7 +169,10 @@ const handleUserCommand = (command: string) => {
       router.push("/settings");
       break;
     case "logout":
-      logout();
+      // 使用用户Store的logout方法
+      userStore.logout();
+      // 跳转到登录页
+      router.push("/login");
       break;
     default:
       break;

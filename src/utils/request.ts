@@ -29,8 +29,13 @@ request.interceptors.request.use(
     // 获取token并添加到请求头
     const token = getTokenFromStorage();
     if (token) {
-      // 统一使用Authorization Bearer格式
-      config.headers.Authorization = `Bearer ${token}`;
+      if (isOAuth2Login()) {
+        // OAuth2模式使用标准的Authorization Bearer格式
+        config.headers.Authorization = `Bearer ${token}`;
+      } else {
+        // Mock模式使用简单的token字段
+        config.headers.token = token;
+      }
     }
     return config;
   },
