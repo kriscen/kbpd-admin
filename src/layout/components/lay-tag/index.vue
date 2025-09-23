@@ -126,7 +126,8 @@ const {
   hideContextMenu,
   initTags,
   addCurrentRouteTag,
-  cleanDuplicateTags
+  cleanDuplicateTags,
+  isExcludedRoute
 } = useTag();
 
 const { layoutConfig } = useLayout();
@@ -226,8 +227,10 @@ const scrollToActiveTag = () => {
 
 // 监听路由变化
 router.beforeEach(to => {
-  // 在路由跳转前添加标签，但避免重复添加
-  if (to.path && to.meta?.title) {
+  // 检查是否应该为该路由创建标签页
+  const shouldAddTag = to.path && to.meta?.title && !isExcludedRoute(to);
+
+  if (shouldAddTag) {
     const existingTag = tagsList.value.find(tag => tag.path === to.path);
     if (!existingTag) {
       const tag: any = {
@@ -250,7 +253,8 @@ router.afterEach(() => {
 // 生命周期
 onMounted(() => {
   initTags();
-  // 移除重复的addCurrentRouteTag调用，因为router.beforeEach已经处理了
+  // 清理不合理的标签
+  cleanDuplicateTags();
   scrollToActiveTag();
 
   // 添加全局点击事件监听
@@ -333,13 +337,13 @@ onUnmounted(() => {
         }
 
         &.is-active {
-          background: var(--el-color-primary);
-          border-color: var(--el-color-primary);
-          color: white;
+          background: var(--el-color-primary) !important;
+          border-color: var(--el-color-primary) !important;
+          color: white !important;
 
           .tag-close {
             opacity: 1;
-            color: white;
+            color: white !important;
 
             &:hover {
               background: rgba(255, 255, 255, 0.2);
@@ -350,6 +354,17 @@ onUnmounted(() => {
         &.is-affix {
           background: var(--el-color-warning-light-9);
           border-color: var(--el-color-warning-light-6);
+          color: var(--el-color-warning-dark-2);
+          font-weight: 500;
+
+          // 确保激活状态的affix标签有更高的对比度
+          &.is-active {
+            background: var(--el-color-primary) !important;
+            border-color: var(--el-color-primary) !important;
+            color: white !important;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(64, 158, 255, 0.3);
+          }
         }
 
         .tag-title {
@@ -462,6 +477,32 @@ onUnmounted(() => {
     background: var(--el-bg-color-page);
     border-color: var(--el-border-color);
   }
+
+  // 暗色主题下的标签样式优化
+  .tag-item {
+    &.is-active {
+      background: var(--el-color-primary) !important;
+      border-color: var(--el-color-primary) !important;
+      color: white !important;
+      box-shadow: 0 2px 8px rgba(64, 158, 255, 0.4);
+
+      &.is-affix {
+        font-weight: 600;
+        // 暗色主题下激活的固定标签增强对比度
+        background: linear-gradient(
+          135deg,
+          var(--el-color-primary),
+          var(--el-color-primary-light-3)
+        ) !important;
+      }
+    }
+
+    &.is-affix {
+      background: var(--el-color-warning-dark-2);
+      border-color: var(--el-color-warning);
+      color: var(--el-color-warning-light-5);
+    }
+  }
 }
 
 // 响应式设计
@@ -470,6 +511,27 @@ onUnmounted(() => {
     .tag-item {
       .tag-title {
         max-width: 80px;
+      }
+
+      // 移动端激活标签增强对比度
+      &.is-active {
+        font-weight: 600 !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+        &.is-affix {
+          // 移动端首页激活标签的特殊处理
+          background: linear-gradient(
+            135deg,
+            var(--el-color-primary),
+            var(--el-color-primary-light-3)
+          ) !important;
+          border: 2px solid var(--el-color-primary-light-3) !important;
+        }
+      }
+
+      &.is-affix {
+        font-weight: 500;
+        border-width: 1.5px;
       }
     }
   }

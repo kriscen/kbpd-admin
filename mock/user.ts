@@ -66,17 +66,6 @@ function createUserList() {
 function createMenuList() {
   return [
     {
-      id: "home",
-      path: "/home",
-      name: "Home",
-      meta: {
-        title: "首页",
-        icon: "HomeFilled",
-        affix: true,
-        keepAlive: true
-      }
-    },
-    {
       id: "system",
       path: "/system",
       name: "System",

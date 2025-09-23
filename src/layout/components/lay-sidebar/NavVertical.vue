@@ -26,14 +26,9 @@
       </el-menu>
     </el-scrollbar>
 
-    <!-- 折叠按钮（桌面端始终显示） -->
-    <div v-if="!isMobile" class="sidebar-collapse">
-      <el-button
-        text
-        circle
-        :icon="sidebarOpened ? ArrowLeft : ArrowRight"
-        @click="toggleSideBar"
-      />
+    <!-- 折叠按钮（桌面端展开时显示） -->
+    <div v-if="!isMobile && sidebarOpened" class="sidebar-collapse">
+      <el-button text circle :icon="ArrowLeft" @click="toggleSideBar" />
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
     class="sidebar-logo"
     :class="{ 'sidebar-logo-collapsed': !sidebarOpened }"
   >
-    <router-link to="/" class="logo-link">
+    <router-link to="/home" class="logo-link">
       <div class="logo-icon">
         <el-icon size="32" color="var(--el-color-primary)">
           <HomeFilled />

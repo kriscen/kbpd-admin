@@ -48,6 +48,16 @@ export const constantRoutes: RouteRecordRaw[] = [
           icon: "Setting",
           requiresAuth: true
         }
+      },
+      {
+        path: "404-content",
+        component: () => import("@/views/404/content.vue"),
+        name: "404Content",
+        meta: {
+          title: "页面不存在",
+          requiresAuth: false,
+          hidden: true
+        }
       }
       // 动态路由将在这里添加
     ]
@@ -67,7 +77,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     ]
   },
   {
-    //404
+    //404 - 独立页面（用于直接访问 /404）
     path: "/404",
     component: () => import("@/views/404/index.vue"),
     name: "404",
@@ -77,9 +87,12 @@ export const constantRoutes: RouteRecordRaw[] = [
     }
   },
   {
-    //任意路由
+    //任意路由 - 跳转到主布局内的404页面
     path: "/:pathMatch(.*)*",
-    redirect: "/404",
+    redirect: to => {
+      // 如果是直接访问不存在的路由，跳转到主布局内的404
+      return "/404-content";
+    },
     name: "any"
   }
 ];

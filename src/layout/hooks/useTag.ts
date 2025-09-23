@@ -146,8 +146,19 @@ export function useTag() {
     if (stored) {
       try {
         const tags = JSON.parse(stored);
-        // 清理重复的标签，保留最后一个，并特别处理首页标签
+        // 清理重复的标签和不应该存在的标签
         const uniqueTags = tags.reduce((acc: TagView[], tag: TagView) => {
+          // 过滤掉不应该存在的标签（404、登录等）
+          if (
+            isExcludedRoute({
+              path: tag.path,
+              meta: { title: tag.title },
+              name: tag.name
+            })
+          ) {
+            return acc;
+          }
+
           // 对于首页标签，统一使用/home路径
           if (tag.path === "/" || (tag.path === "/home" && tag.affix)) {
             const existingHomeIndex = acc.findIndex(
@@ -205,25 +216,25 @@ export function useTag() {
 
   // 清理重复标签的工具函数
   const cleanDuplicateTags = () => {
-    // 先清空本地存储
-    localStorage.removeItem("tags-view");
+    // 过滤掉不应该存在的标签
+    tagsList.value = tagsList.value.filter(tag => {
+      return !isExcludedRoute({
+        path: tag.path,
+        meta: { title: tag.title },
+        name: tag.name
+      });
+    });
 
-    // 重新初始化标签列表
-    tagsList.value = [];
+    // 保存到本地存储
+    saveTagsToStorage();
 
-    // 重新初始化
-    initTags();
-
-    // 添加当前路由标签
-    addCurrentRouteTag();
-
-    console.log("清理重复标签完成");
+    console.log("清理不合理标签完成");
   };
 
   // 根据当前路由添加标签
   const addCurrentRouteTag = () => {
     const { path, meta, name } = route;
-    if (path && meta?.title) {
+    if (path && meta?.title && !isExcludedRoute(route)) {
       const tag: TagView = {
         path,
         name: name as string,
@@ -234,6 +245,42 @@ export function useTag() {
       };
       addTag(tag);
     }
+  };
+
+  // 判断是否应该排除的路由
+  const isExcludedRoute = (routeInfo: any) => {
+    // 排除的路由类型：
+    // 1. 登录相关页面
+    if (routeInfo.path === "/login" || routeInfo.path.startsWith("/auth/")) {
+      return true;
+    }
+
+    // 2. 404相关页面
+    if (
+      routeInfo.path === "/404" ||
+      routeInfo.path === "/404-content" ||
+      routeInfo.name === "404" ||
+      routeInfo.name === "404Content"
+    ) {
+      return true;
+    }
+
+    // 3. 重定向页面
+    if (routeInfo.path.startsWith("/redirect")) {
+      return true;
+    }
+
+    // 4. 标记为隐藏的页面
+    if (routeInfo.meta?.hidden === true) {
+      return true;
+    }
+
+    // 5. 没有标题的页面
+    if (!routeInfo.meta?.title) {
+      return true;
+    }
+
+    return false;
   };
 
   // 计算属性
@@ -320,6 +367,7 @@ export function useTag() {
     hideContextMenu,
     initTags,
     addCurrentRouteTag,
-    cleanDuplicateTags
+    cleanDuplicateTags,
+    isExcludedRoute
   };
 }

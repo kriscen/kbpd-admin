@@ -1,8 +1,8 @@
 <template>
   <div class="navbar-container">
     <div class="navbar-left">
-      <!-- 移动端菜单切换按钮 -->
-      <div v-if="isMobile" class="hamburger-menu" @click="toggleSideBar">
+      <!-- 移动端和PC端菜单切换按钮 -->
+      <div class="hamburger-menu" @click="toggleSideBar">
         <el-icon size="20">
           <Menu />
         </el-icon>
@@ -139,7 +139,9 @@ const notificationCount = ref(3);
 
 // 面包屑导航
 const breadcrumbs = computed(() => {
-  const matched = route.matched.filter(item => item.meta?.title);
+  const matched = route.matched.filter(
+    item => item.meta?.title && item.name !== "Home"
+  );
   return matched.map(item => ({
     path: item.path,
     title: item.meta?.title as string

@@ -278,9 +278,10 @@ onMounted(() => {
       );
       border: none;
       color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
       :deep(.el-card__body) {
-        padding: 24px;
+        padding: 32px;
       }
 
       .welcome-content {
@@ -290,21 +291,25 @@ onMounted(() => {
 
         .welcome-text {
           h2 {
-            margin: 0 0 8px 0;
-            font-size: 24px;
+            margin: 0 0 12px 0;
+            font-size: 28px;
             font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           }
 
           p {
             margin: 0;
             opacity: 0.9;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
           }
         }
 
         .welcome-avatar {
           :deep(.el-avatar) {
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           }
         }
       }
@@ -318,14 +323,17 @@ onMounted(() => {
       height: 120px;
       cursor: pointer;
       transition: all 0.3s;
+      border: 1px solid var(--el-border-color-lighter);
+      background: var(--el-bg-color);
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+        border-color: var(--el-color-primary-light-7);
       }
 
       :deep(.el-card__body) {
-        padding: 20px;
+        padding: 24px;
         height: 100%;
       }
 
@@ -335,29 +343,35 @@ onMounted(() => {
         height: 100%;
 
         .stats-icon {
-          margin-right: 16px;
+          margin-right: 20px;
+          padding: 12px;
+          background: var(--el-color-primary-light-9);
+          border-radius: 8px;
         }
 
         .stats-info {
           flex: 1;
 
           .stats-value {
-            font-size: 28px;
-            font-weight: 600;
+            font-size: 32px;
+            font-weight: 700;
             color: var(--el-text-color-primary);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            line-height: 1;
           }
 
           .stats-label {
             font-size: 14px;
             color: var(--el-text-color-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 500;
           }
 
           .stats-trend {
             display: flex;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: 500;
 
             .el-icon {
               margin-right: 4px;

@@ -115,6 +115,14 @@ router.beforeEach(
     const isLoggedIn = !!token;
     const userInfo = getUserInfoFromStorage();
 
+    // 检查路由是否存在
+    const matched = router.resolve(to.path);
+    if (matched.name === "any" && to.path !== "/404-content") {
+      // 不存在的路由，跳转到主布局内的404页面
+      next("/404-content");
+      return;
+    }
+
     // 设置页面标题
     if (to.meta?.title) {
       document.title = `${to.meta.title} - 后台管理系统`;
