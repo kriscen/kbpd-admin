@@ -1,0 +1,24 @@
+{
+  "name": "@kbpd/tsconfig",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "internal/tsconfig"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "base.json",
+    "library.json",
+    "node.json",
+    "web-app.json",
+    "web.json"
+  ],
+  "dependencies": {
+    "@kbpd/types": "workspace:*",
+    "vite": "catalog:"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@kbpd/commitlint-config",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "internal/lint-configs/commitlint-config"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "default": "./index.mjs"
+    }
+  },
+  "dependencies": {
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "@kbpd/node-utils": "workspace:*",
+    "commitlint-plugin-function-rules": "catalog:",
+    "cz-git": "catalog:",
+    "czg": "catalog:"
+  }
+}

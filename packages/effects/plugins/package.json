@@ -1,0 +1,46 @@
+{
+  "name": "@kbpd/plugins",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "packages/effects/plugins"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    "./echarts": {
+      "types": "./src/echarts/index.ts",
+      "default": "./src/echarts/index.ts"
+    },
+    "./vxe-table": {
+      "types": "./src/vxe-table/index.ts",
+      "default": "./src/vxe-table/index.ts"
+    },
+    "./motion": {
+      "types": "./src/motion/index.ts",
+      "default": "./src/motion/index.ts"
+    }
+  },
+  "dependencies": {
+    "@kbpd-core/form-ui": "workspace:*",
+    "@kbpd-core/shadcn-ui": "workspace:*",
+    "@kbpd-core/shared": "workspace:*",
+    "@kbpd/hooks": "workspace:*",
+    "@kbpd/icons": "workspace:*",
+    "@kbpd/locales": "workspace:*",
+    "@kbpd/preferences": "workspace:*",
+    "@kbpd/types": "workspace:*",
+    "@kbpd/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "@vueuse/motion": "catalog:",
+    "echarts": "catalog:",
+    "vue": "catalog:",
+    "vxe-pc-ui": "catalog:",
+    "vxe-table": "catalog:"
+  }
+}

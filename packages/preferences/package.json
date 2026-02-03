@@ -1,0 +1,25 @@
+{
+  "name": "@kbpd/preferences",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "packages/preferences"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@kbpd-core/preferences": "workspace:*",
+    "@kbpd-core/typings": "workspace:*"
+  }
+}

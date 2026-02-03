@@ -1,0 +1,156 @@
+{
+  "folders": [
+    {
+      "name": "@kbpd/backend-mock",
+      "path": "apps/backend-mock",
+    },
+    {
+      "name": "@kbpd/web-ele",
+      "path": "apps/web-ele",
+    },
+    {
+      "name": "@kbpd/commitlint-config",
+      "path": "internal/lint-configs/commitlint-config",
+    },
+    {
+      "name": "@kbpd/eslint-config",
+      "path": "internal/lint-configs/eslint-config",
+    },
+    {
+      "name": "@kbpd/prettier-config",
+      "path": "internal/lint-configs/prettier-config",
+    },
+    {
+      "name": "@kbpd/stylelint-config",
+      "path": "internal/lint-configs/stylelint-config",
+    },
+    {
+      "name": "@kbpd/node-utils",
+      "path": "internal/node-utils",
+    },
+    {
+      "name": "@kbpd/tailwind-config",
+      "path": "internal/tailwind-config",
+    },
+    {
+      "name": "@kbpd/tsconfig",
+      "path": "internal/tsconfig",
+    },
+    {
+      "name": "@kbpd/vite-config",
+      "path": "internal/vite-config",
+    },
+    {
+      "name": "@kbpd-core/design",
+      "path": "packages/@core/base/design",
+    },
+    {
+      "name": "@kbpd-core/icons",
+      "path": "packages/@core/base/icons",
+    },
+    {
+      "name": "@kbpd-core/shared",
+      "path": "packages/@core/base/shared",
+    },
+    {
+      "name": "@kbpd-core/typings",
+      "path": "packages/@core/base/typings",
+    },
+    {
+      "name": "@kbpd-core/composables",
+      "path": "packages/@core/composables",
+    },
+    {
+      "name": "@kbpd-core/preferences",
+      "path": "packages/@core/preferences",
+    },
+    {
+      "name": "@kbpd-core/form-ui",
+      "path": "packages/@core/ui-kit/form-ui",
+    },
+    {
+      "name": "@kbpd-core/layout-ui",
+      "path": "packages/@core/ui-kit/layout-ui",
+    },
+    {
+      "name": "@kbpd-core/menu-ui",
+      "path": "packages/@core/ui-kit/menu-ui",
+    },
+    {
+      "name": "@kbpd-core/popup-ui",
+      "path": "packages/@core/ui-kit/popup-ui",
+    },
+    {
+      "name": "@kbpd-core/shadcn-ui",
+      "path": "packages/@core/ui-kit/shadcn-ui",
+    },
+    {
+      "name": "@kbpd-core/tabs-ui",
+      "path": "packages/@core/ui-kit/tabs-ui",
+    },
+    {
+      "name": "@kbpd/constants",
+      "path": "packages/constants",
+    },
+    {
+      "name": "@kbpd/access",
+      "path": "packages/effects/access",
+    },
+    {
+      "name": "@kbpd/common-ui",
+      "path": "packages/effects/common-ui",
+    },
+    {
+      "name": "@kbpd/hooks",
+      "path": "packages/effects/hooks",
+    },
+    {
+      "name": "@kbpd/layouts",
+      "path": "packages/effects/layouts",
+    },
+    {
+      "name": "@kbpd/plugins",
+      "path": "packages/effects/plugins",
+    },
+    {
+      "name": "@kbpd/request",
+      "path": "packages/effects/request",
+    },
+    {
+      "name": "@kbpd/icons",
+      "path": "packages/icons",
+    },
+    {
+      "name": "@kbpd/locales",
+      "path": "packages/locales",
+    },
+    {
+      "name": "@kbpd/preferences",
+      "path": "packages/preferences",
+    },
+    {
+      "name": "@kbpd/stores",
+      "path": "packages/stores",
+    },
+    {
+      "name": "@kbpd/styles",
+      "path": "packages/styles",
+    },
+    {
+      "name": "@kbpd/types",
+      "path": "packages/types",
+    },
+    {
+      "name": "@kbpd/utils",
+      "path": "packages/utils",
+    },
+    {
+      "name": "@kbpd/turbo-run",
+      "path": "scripts/turbo-run",
+    },
+    {
+      "name": "@kbpd/vsh",
+      "path": "scripts/vsh",
+    },
+  ],
+}

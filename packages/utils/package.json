@@ -1,0 +1,26 @@
+{
+  "name": "@kbpd/utils",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "packages/utils"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@kbpd-core/shared": "workspace:*",
+    "@kbpd-core/typings": "workspace:*",
+    "vue-router": "catalog:"
+  }
+}

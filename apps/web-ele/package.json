@@ -1,0 +1,52 @@
+{
+  "name": "@kbpd/web-ele",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "apps/web-ele"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Kris",
+    "email": "kriscen@163.com",
+    "url": "https://github.com/kriscen"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "dependencies": {
+    "@kbpd/access": "workspace:*",
+    "@kbpd/common-ui": "workspace:*",
+    "@kbpd/constants": "workspace:*",
+    "@kbpd/hooks": "workspace:*",
+    "@kbpd/icons": "workspace:*",
+    "@kbpd/layouts": "workspace:*",
+    "@kbpd/locales": "workspace:*",
+    "@kbpd/plugins": "workspace:*",
+    "@kbpd/preferences": "workspace:*",
+    "@kbpd/request": "workspace:*",
+    "@kbpd/stores": "workspace:*",
+    "@kbpd/styles": "workspace:*",
+    "@kbpd/types": "workspace:*",
+    "@kbpd/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "dayjs": "catalog:",
+    "element-plus": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "unplugin-element-plus": "catalog:"
+  }
+}

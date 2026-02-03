@@ -1,0 +1,42 @@
+{
+  "name": "@kbpd/layouts",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "packages/effects/layouts"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@kbpd-core/composables": "workspace:*",
+    "@kbpd-core/form-ui": "workspace:*",
+    "@kbpd-core/layout-ui": "workspace:*",
+    "@kbpd-core/menu-ui": "workspace:*",
+    "@kbpd-core/popup-ui": "workspace:*",
+    "@kbpd-core/shadcn-ui": "workspace:*",
+    "@kbpd-core/shared": "workspace:*",
+    "@kbpd-core/tabs-ui": "workspace:*",
+    "@kbpd/constants": "workspace:*",
+    "@kbpd/hooks": "workspace:*",
+    "@kbpd/icons": "workspace:*",
+    "@kbpd/locales": "workspace:*",
+    "@kbpd/preferences": "workspace:*",
+    "@kbpd/stores": "workspace:*",
+    "@kbpd/types": "workspace:*",
+    "@kbpd/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "@kbpd/common-ui",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kriscen/kbpd-admin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscen/kbpd-admin.git",
+    "directory": "packages/effects/common-ui"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./es/tippy": {
+      "types": "./src/components/tippy/index.ts",
+      "default": "./src/components/tippy/index.ts"
+    },
+    "./es/loading": {
+      "types": "./src/components/loading/index.ts",
+      "default": "./src/components/loading/index.ts"
+    }
+  },
+  "dependencies": {
+    "@kbpd-core/form-ui": "workspace:*",
+    "@kbpd-core/popup-ui": "workspace:*",
+    "@kbpd-core/preferences": "workspace:*",
+    "@kbpd-core/shadcn-ui": "workspace:*",
+    "@kbpd-core/shared": "workspace:*",
+    "@kbpd/constants": "workspace:*",
+    "@kbpd/hooks": "workspace:*",
+    "@kbpd/icons": "workspace:*",
+    "@kbpd/locales": "workspace:*",
+    "@kbpd/types": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "@vueuse/integrations": "catalog:",
+    "json-bigint": "catalog:",
+    "qrcode": "catalog:",
+    "tippy.js": "catalog:",
+    "vue": "catalog:",
+    "vue-json-viewer": "catalog:",
+    "vue-router": "catalog:",
+    "vue-tippy": "catalog:"
+  },
+  "devDependencies": {
+    "@types/qrcode": "catalog:"
+  }
+}
