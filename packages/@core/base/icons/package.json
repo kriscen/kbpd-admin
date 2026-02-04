@@ -33,6 +33,8 @@
     }
   },
   "dependencies": {
+    "@iconify-json/carbon": "^1.2.6",
+    "@iconify-json/lucide": "^1.2.23",
     "@iconify/vue": "catalog:",
     "lucide-vue-next": "catalog:",
     "vue": "catalog:"

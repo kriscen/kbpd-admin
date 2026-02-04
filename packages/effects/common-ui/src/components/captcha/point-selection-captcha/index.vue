@@ -4,7 +4,7 @@ import type { CaptchaPoint, PointSelectionCaptchaProps } from '../types';
 import { RotateCw } from '@kbpd/icons';
 import { $t } from '@kbpd/locales';
 
-import { KbdpButton, KbdpIconButton } from '@kbpd-core/shadcn-ui';
+import { KbpdButton, KbpdIconButton } from '@kbpd-core/shadcn-ui';
 
 import { useCaptchaPoints } from '../hooks/useCaptchaPoints';
 import CaptchaCard from './point-selection-captcha-card.vue';
